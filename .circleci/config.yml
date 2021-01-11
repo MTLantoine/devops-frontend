@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  build:
+    docker: &shared_docker
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v2-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: npm-v2-dependencies-{{ checksum "yarn.lock" }}
+
+workflows:
+  version: 2
+  mybuild:
+    jobs:
+      - build
