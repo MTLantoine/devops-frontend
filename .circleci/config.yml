@@ -13,7 +13,6 @@ jobs:
           paths:
             - ./node_modules
           key: npm-v2-dependencies-{{ checksum "yarn.lock" }}
-  
   deploy:
     docker:
       - image: docker:17.05.0-ce-git
